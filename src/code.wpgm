@@ -1,0 +1,19 @@
+import wollok.game.*
+import messi.*
+import barraEmocional.*
+import recolectables.*
+
+program juego {
+  game.title("Messi Game")
+  game.width(15)
+  game.height(9)
+  game.cellSize(150)
+  game.boardGround("assets/board.png")
+  game.addVisual(messi)
+  game.addVisual(barraEmocional)
+  keyboard.left().onPressDo({ messi.moverIzquierda() })
+  keyboard.right().onPressDo({ messi.moverDerecha() })
+  game.onTick(100, "movimientoMessi", { messi.avanzar() })
+  game.onCollideDo(messi, { objeto => messi.atraparRecolectable(objeto) })
+  game.start()
+}
