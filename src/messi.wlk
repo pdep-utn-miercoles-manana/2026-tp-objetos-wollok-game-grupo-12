@@ -1,34 +1,43 @@
 import wollok.game.*
 import barraEmocional.*
 import recolectables.*
-
+import gestionDeNiveles.*
+import estados.*
 object messi {
-    var posicion = game.at(8, 0)
-    var estadoEmocional = "estable"
-    // Idea para avanzar constantemente mientras se tiene una flecha apretada
-    var property direccion = null
+    var position = game.at(8, 0)
+    var estadoEmocional = estable
+    var enCooldown = false
+
+    method position() = position
 
     method image() = "messi.png"
 
     method estadoEmocional() = estadoEmocional
 
-    // Idea para avanzar constantemente mientras se tiene una flecha apretada
-    method avanzar() {
-        if (direccion != null) {
-            posicion = direccion.siguientePosicion(posicion)
+    method moverseALaIzquierda() {
+        if (not enCooldown) {
+            const nuevaX = 0.max(position.x() - 1)
+            position = game.at(nuevaX, position.y())
+            self.iniciarCooldown()
         }
     }
 
-    method moverIzquierda() {
-        //const nuevaX = 0.max(posicion.x() - estadoEmocional.velocidad())
-        //posicion = game.at(nuevaX, posicion.y())
+    method moverseALaDerecha() {
+        if (not enCooldown) { 
+            const nuevaX = (game.width() - 1).min(position.x() + 1)
+            position = game.at(nuevaX, position.y())
+            self.iniciarCooldown()
+        }
     }
 
-    method moverDerecha() {
-        //const nuevaX = (game.width() - 1).min(posicion.x() + estadoEmocional.velocidad())
-        //posicion = game.at(nuevaX, posicion.y())
+    method iniciarCooldown() {
+        enCooldown = true
+        game.onTick(estadoEmocional.tiempoCooldown(), "cooldown", {
+            enCooldown = false
+            game.removeTickEvent("cooldown")
+        })
     }
-    
+
     method atraparRecolectable(recolectable){
         recolectable.esAtrapadoPor(self)
         self.chequearEstado()
@@ -36,13 +45,16 @@ object messi {
     }
 
     method chequearEstado() {
-        if (barraEmocional.nivelDePorcentaje() > 80) { estadoEmocional = "crisis" }
-        else if (barraEmocional.nivelDePorcentaje() < 20) { estadoEmocional = "gloria" }
-        else { estadoEmocional = "estable" }
+        if (barraEmocional.nivelDePorcentaje() == 100) { self.perderJuego() }
+        else if (barraEmocional.nivelDePorcentaje() > 80) { estadoEmocional = gloria }
+        else if (barraEmocional.nivelDePorcentaje() < 20) { estadoEmocional = crisis }
+        else { estadoEmocional = estable }
+    }
+
+    method perderJuego() {
+        game.clear() 
+        game.addVisual(self)
+        game.say(self, "¡Perdí!")
     }
 
 }
-// Idea para avanzar constantemente mientras se tiene una flecha apretada
-
-object derecha   { method siguientePosicion(pos) = pos.right(1) }
-object izquierda { method siguientePosicion(pos) = pos.left(1) }

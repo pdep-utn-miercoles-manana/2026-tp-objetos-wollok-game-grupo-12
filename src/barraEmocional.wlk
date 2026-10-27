@@ -1,10 +1,13 @@
 import wollok.game.*
-
+import messi.*
+import recolectables.*
+import gestionDeNiveles.*
+import estados.*
 object barraEmocional {
     var porcentaje = 0.5
-    const posicion = game.at(8, 9)
+    const position = game.at(7, 8) 
 
-    method posicion() = posicion
+    method position() = position
     method image() = "barraEmocional.png"
     method nivelDePorcentaje() = porcentaje * 100
 
@@ -12,8 +15,4 @@ object barraEmocional {
         porcentaje = 0.max(1.min(porcentaje + cantidad))
     }
 
-    //ver más adelante
-    method modificarDificultad(recolectable){
-        
-    }
 }

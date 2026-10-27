@@ -2,11 +2,10 @@ import wollok.game.*
 import barraEmocional.*
 
 class Recolectable {
+    var position = game.origin()
 
-    var posicion = game.origin()
-
-    method position() = posicion
-    method position(nuevaPosicion) { posicion = nuevaPosicion }
+    method position() = position
+    method position(nuevaPosicion) { position = nuevaPosicion }
     
     method image()
 
@@ -15,24 +14,28 @@ class Recolectable {
     }
 
     method caer() {
-        posicion = posicion.down(1)
-        if (posicion.y() < 0) {
-            game.removeVisual(self)
-            game.removeTickEvent("caer_" + self.identity().toString())
+        position = position.down(1)
+        if (position.y() < 0) {
+            self.desaparecerSeguro()
         }
     }
 
     method esAtrapadoPor(personaje) {
         self.aplicarEfecto()
-        game.removeVisual(self)
-        game.removeTickEvent("caer_" + self.identity().toString())
+        self.desaparecerSeguro()
+    }
+
+    method desaparecerSeguro() {
+        if (game.hasVisual(self)) {
+            game.removeVisual(self)
+            game.removeTickEvent("caer_" + self.identity().toString())
+        }
     }
 
     method aplicarEfecto()
-
 }
 
-class RecolectableMalo inherits Recolectable {
+class Critica inherits Recolectable {
     const impacto 
     
     override method image() = "critica.png"
@@ -42,4 +45,11 @@ class RecolectableMalo inherits Recolectable {
     }
 }
 
-//const critica = new RecolectableMalo(impacto = -0.5)
+class Gol inherits Recolectable {
+    const impacto 
+    override method image() = "gol.png" 
+    
+    override method aplicarEfecto() {
+        barraEmocional.modificarPorcentaje(impacto)
+    }
+}

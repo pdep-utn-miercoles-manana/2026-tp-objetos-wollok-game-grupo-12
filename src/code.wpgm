@@ -2,7 +2,8 @@ import wollok.game.*
 import messi.*
 import barraEmocional.*
 import recolectables.*
-
+import gestionDeNiveles.*
+import estados.*
 program juego {
   game.title("Messi Game")
   game.width(15)
@@ -11,9 +12,9 @@ program juego {
   game.boardGround("assets/board.png")
   game.addVisual(messi)
   game.addVisual(barraEmocional)
-  keyboard.left().onPressDo({ messi.moverIzquierda() })
-  keyboard.right().onPressDo({ messi.moverDerecha() })
-  game.onTick(100, "movimientoMessi", { messi.avanzar() })
+  keyboard.left().onPressDo({ messi.moverseALaIzquierda() })
+  keyboard.right().onPressDo({ messi.moverseALaDerecha() })
   game.onCollideDo(messi, { objeto => messi.atraparRecolectable(objeto) })
+  gestionDeNivel.iniciarCaidaDeRecolectables()
   game.start()
 }
