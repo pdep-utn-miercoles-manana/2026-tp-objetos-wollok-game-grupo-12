@@ -7,8 +7,9 @@ object gestionDeNivel {
     }
 
     method generarObjeto() {
-        const opciones = messi.estadoEmocional().itemsPosibles()
-        const nuevoItem = opciones.anyOne()
+        const generadorDeItem = messi.estadoEmocional().itemsPosibles().anyOne()
+
+        const nuevoItem = generadorDeItem.apply()
 
         const xAleatoria = (0 .. game.width() - 1).anyOne()
         nuevoItem.position(game.at(xAleatoria, game.height() - 1))
