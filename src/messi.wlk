@@ -3,6 +3,8 @@ import barraEmocional.*
 import recolectables.*
 import gestionDeNiveles.*
 import estados.*
+import musica.*
+import pantallas.*
 object messi {
     var position = game.at(8, 0)
     var estadoEmocional = estable
@@ -13,6 +15,10 @@ object messi {
     method image() = "messi.png"
 
     method estadoEmocional() = estadoEmocional
+
+    method cambiarEstado(nuevoEstado) {
+        estadoEmocional = nuevoEstado
+    }
 
     method moverseALaIzquierda() {
         if (not enCooldown) {
@@ -40,21 +46,18 @@ object messi {
 
     method atraparRecolectable(recolectable){
         recolectable.esAtrapadoPor(self)
-        self.chequearEstado()
         
     }
 
-    method chequearEstado() {
-        if (barraEmocional.nivelDePorcentaje() == 100) { self.perderJuego() }
-        else if (barraEmocional.nivelDePorcentaje() > 80) { estadoEmocional = gloria }
-        else if (barraEmocional.nivelDePorcentaje() < 20) { estadoEmocional = crisis }
-        else { estadoEmocional = estable }
-    }
-
     method perderJuego() {
-        game.clear() 
-        game.addVisual(self)
-        game.say(self, "¡Perdí!")
+        game.say(self, "Es Increible pero no se me DA!!!!")
+        pantallaPerder.mostrar()
+        reproductorMusical.reproducirDerrota()
+    }
+    method ganarJuego() {
+        game.say(self, "!!!! Somos Campeones! del Mundo !!!! " )
+        pantallaGanar.mostrar()
+        reproductorMusical.reproducirVictoria()
     }
 
 }

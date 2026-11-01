@@ -35,7 +35,7 @@ class Recolectable {
     method aplicarEfecto()
 }
 
-class Critica inherits Recolectable {
+class RecolectableMalo inherits Recolectable {
     const impacto 
     
     override method image() = "critica.png"
@@ -45,7 +45,7 @@ class Critica inherits Recolectable {
     }
 }
 
-class Gol inherits Recolectable {
+class RecolectableBueno inherits Recolectable {
     const impacto 
     override method image() = "gol.png" 
     
@@ -53,3 +53,12 @@ class Gol inherits Recolectable {
         barraEmocional.modificarPorcentaje(impacto)
     }
 }
+
+//const sancorSeguros = new RecolectableMalo(impacto = -1.0)
+//const penalErrado = new RecolectableMalo(impacto = -0.5)
+//const finalPerdida = new RecolectableMalo(impacto = -0.4)
+//const gol = new RecolectableBueno(impacto = 0.15)
+//const critica = new RecolectableMalo(impacto = -0.15)
+//const copaMundial = new RecolectableBueno(impacto = 0.4)
+//const copaAmerica = new RecolectableBueno(impacto = 0.25)
+//const hattrick = new RecolectableBueno(impacto = 0.25)

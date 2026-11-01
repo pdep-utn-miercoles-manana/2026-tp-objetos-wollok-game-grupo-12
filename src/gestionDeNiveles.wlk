@@ -18,3 +18,4 @@ object gestionDeNivel {
         nuevoItem.iniciarCaida(messi.estadoEmocional().velocidadCaida())
     }
 }
+

@@ -4,18 +4,19 @@ import barraEmocional.*
 import recolectables.*
 import gestionDeNiveles.*
 import estados.*
+import pantallas.*
+import musica.*
 
 program juego {
   game.title("Messi Game")
   game.width(15)
   game.height(9)
-  game.cellSize(150)
+  game.cellSize(60)
   game.boardGround("board.png")
-  game.addVisual(messi)
-  game.addVisual(barraEmocional)
-  keyboard.left().onPressDo({ messi.moverseALaIzquierda() })
-  keyboard.right().onPressDo({ messi.moverseALaDerecha() })
-  game.onCollideDo(messi, { objeto => messi.atraparRecolectable(objeto) })
-  gestionDeNivel.iniciarCaidaDeRecolectables()
+  reproductorMusical.iniciarMusicaFondo()
+
+  
+  pantallaMenu.mostrar()
+
   game.start()
 }

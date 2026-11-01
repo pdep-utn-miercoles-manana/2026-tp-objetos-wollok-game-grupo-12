@@ -18,18 +18,12 @@ object barraEmocional {
     method estaEnMaximo() = porcentaje >= 1.0
     method estaEnMinimo() = porcentaje <= 0.0
 
-    method image() {
-        return "barra_" + self.sufijoVisual() +".png"
-    }
+    method image() = "barraEmocional.png"
 
-    method sufijoVisual() {
-        if(porcentaje >= 0.8) {
-            return "gloria"
-        } else if (porcentaje <= 0.2) {
-            return "crisis"
-        } else {
-            return "estable"
-        }
+    method chequearEstado() {
+        if (self.nivelDePorcentaje() == 0.0) { messi.perderJuego() }
+        else if (self.nivelDePorcentaje() >= 0.65) { messi.cambiarEstado(gloria) }
+        else if (self.nivelDePorcentaje() <= 0.35) { messi.cambiarEstado(crisis) }
+        else { messi.cambiarEstado(estable) }
     }
-
 }
