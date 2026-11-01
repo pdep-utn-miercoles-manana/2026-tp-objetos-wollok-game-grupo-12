@@ -1,9 +1,22 @@
 import wollok.game.*
 import messi.*
+import estados.*
 
 object gestionDeNivel {
+    var dificultadActual = normal
+    method dificultadActual() = dificultadActual
+    method cambiarDificultad(nuevaDificultad) { dificultadActual = nuevaDificultad }
     method iniciarCaidaDeRecolectables() {
-        game.onTick(1500, "generadorObjetos", { self.generarObjeto() })
+        self.programarProximoObjeto()
+    }
+
+    method programarProximoObjeto() {
+        const tiempoEspera = messi.estadoEmocional().velocidadCaida() * 3
+        
+        game.schedule(tiempoEspera, {
+            self.generarObjeto()
+            self.programarProximoObjeto()
+        })
     }
 
     method generarObjeto() {
