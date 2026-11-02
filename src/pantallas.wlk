@@ -2,6 +2,18 @@ import wollok.game.*
 import messi.*
 import barraEmocional.*
 import gestionDeNiveles.*
+import estados.* 
+
+
+object indicadorDificultad {
+    var texto = "Dificultad: NORMAL (Usa las teclas 1 o 2 para cambiar)"
+    
+    
+    method position() = game.at(4, 1) 
+    method text() = texto
+    
+    method cambiarTexto(nuevoTexto) { texto = nuevoTexto }
+}
 
 object pantallaMenu {
     method position() = game.at(0, 0)
@@ -9,11 +21,23 @@ object pantallaMenu {
 
     method mostrar() {
         game.addVisual(self)
+        game.addVisual(indicadorDificultad)
+        
+        keyboard.num1().onPressDo({ 
+            gestionDeNivel.cambiarDificultad(normal)
+            indicadorDificultad.cambiarTexto("Dificultad seleccionada: NORMAL")
+        })
+        keyboard.num2().onPressDo({ 
+            gestionDeNivel.cambiarDificultad(dificil)
+            indicadorDificultad.cambiarTexto("Dificultad seleccionada: DIFÍCIL")
+        })
+
         keyboard.enter().onPressDo({self.iniciarJuego()})
     }
 
     method iniciarJuego() {
         game.removeVisual(self)
+        game.removeVisual(indicadorDificultad)
 
         game.addVisual(messi)
         game.addVisual(barraEmocional)
@@ -25,8 +49,6 @@ object pantallaMenu {
         gestionDeNivel.iniciarCaidaDeRecolectables()
     }
 }
-
-
 object pantallaPerder {
     method position() = game.at(0, 0)
     method image() = "gameOver.png"

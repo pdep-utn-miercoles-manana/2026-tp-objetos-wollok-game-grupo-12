@@ -9,7 +9,7 @@ object barraEmocional {
 
     method position() = position
     
-    method nivelDePorcentaje() = porcentaje * 100
+    method porcentaje() = porcentaje
 
     method modificarPorcentaje(cantidad) {
         porcentaje = 0.max(1.min(porcentaje + cantidad))
@@ -23,10 +23,10 @@ object barraEmocional {
 
     method chequearEstado() {
         const dif = gestionDeNivel.dificultadActual()
-        if (self.nivelDePorcentaje() == 0.0) { messi.perderJuego() }
-        else if (porcentaje == 1.0) { messi.ganarJuego() }
-        else if (self.nivelDePorcentaje() >= 0.65) { messi.cambiarEstado(dif.gloria()) }
-        else if (self.nivelDePorcentaje() <= 0.35) { messi.cambiarEstado(dif.crisis()) }
+        if (self.estaEnMinimo()) { messi.perderJuego() }
+        else if (self.estaEnMaximo()) { messi.ganarJuego() }
+        else if (self.porcentaje() >= 0.65) { messi.cambiarEstado(dif.gloria()) }
+        else if (self.porcentaje() <= 0.35) { messi.cambiarEstado(dif.crisis()) }
         else { messi.cambiarEstado(dif.estable()) }
     }
 }

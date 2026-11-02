@@ -7,7 +7,7 @@ import musica.*
 import pantallas.*
 object messi {
     var position = game.at(8, 0)
-    var estadoEmocional = estable
+    var estadoEmocional = normal.estable()
     var enCooldown = false
 
     method position() = position
