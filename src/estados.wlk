@@ -30,13 +30,13 @@ object dificil {
     method crisis() = new EstadoEmocional(
         tiempoCooldown = 400,
         velocidadCaida = 150,
-        itemsPosibles = [ sancorSeguros, finalPerdida, finalPerdida, critica ] 
+        itemsPosibles = [ sancorSeguros, finalPerdida, penalErrado, critica,gol] 
     )
     
     method estable() = new EstadoEmocional(
         tiempoCooldown = 200, 
         velocidadCaida = 300, 
-        itemsPosibles = [ penalErrado, critica, finalPerdida, gol ] 
+        itemsPosibles = [ penalErrado, critica, finalPerdida, gol, hattrick ] 
     )
     
     method gloria() = new EstadoEmocional(

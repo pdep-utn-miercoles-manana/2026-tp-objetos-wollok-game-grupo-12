@@ -54,8 +54,8 @@ class RecolectableBueno inherits Recolectable {
     }
 }
 
-const sancorSeguros = { => new RecolectableMalo(impacto = -4.5) }
-const penalErrado = { => new RecolectableMalo(impacto = -0.5) }
+const sancorSeguros = { => new RecolectableMalo(impacto = -0.45) }
+const penalErrado = { => new RecolectableMalo(impacto = -0.30) }
 const finalPerdida = { => new RecolectableMalo(impacto = -0.4) }
 const gol = { => new RecolectableBueno(impacto = 0.15) }
 const critica = { => new RecolectableMalo(impacto = -0.15) }
