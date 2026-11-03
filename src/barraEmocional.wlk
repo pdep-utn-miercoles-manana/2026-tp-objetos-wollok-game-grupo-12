@@ -5,7 +5,7 @@ import gestionDeNiveles.*
 import estados.*
 object barraEmocional {
     var porcentaje = 0.5
-    const position = game.at(7, 8) 
+    const position = game.at(6, 8) 
 
     method position() = position
     
@@ -29,4 +29,11 @@ object barraEmocional {
         else if (self.porcentaje() <= 0.35) { messi.cambiarEstado(dif.crisis()) }
         else { messi.cambiarEstado(dif.estable()) }
     }
+}
+
+object indicadorBarra {
+    method image() = "indicador.png"
+    
+    method xActual() = 4 + (barraEmocional.porcentaje() * 4)
+    method position() = game.at(self.xActual().truncate(0), 8)
 }
