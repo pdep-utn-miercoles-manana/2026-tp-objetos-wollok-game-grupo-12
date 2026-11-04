@@ -2,8 +2,25 @@ import wollok.game.*
 import messi.*
 import barraEmocional.*
 import gestionDeNiveles.*
-import estados.* 
+import estados.*
+import musica.*
 
+object atajoVolverAlMenu {
+    method habilitar() {
+        keyboard.m().onPressDo({ self.volver() })
+    }
+
+    method volver() {
+        game.clear()
+        reproductorMusical.reiniciar()
+        pantallaMenu.mostrar()
+    }
+}
+
+object indicadorVolverAlMenu {
+    method position() = game.at(8, 1)
+    method text() = "Presioná M para volver al menú"
+}
 
 object indicadorDificultad {
     var texto = "Dificultad seleccionada: NORMAL (Usá 2 para cambiar, Enter para iniciar)"
@@ -45,6 +62,9 @@ object pantallaMenu {
             game.removeVisual(indicadorDificultad)
         }
 
+        barraEmocional.reiniciar()
+        messi.reiniciar()
+
         game.addVisual(messi)
         game.addVisual(barraEmocional)
         game.addVisual(indicadorBarra)
@@ -54,6 +74,7 @@ object pantallaMenu {
 
         game.onCollideDo(messi, { objeto => messi.atraparRecolectable(objeto) })
         gestionDeNivel.iniciarCaidaDeRecolectables()
+        atajoVolverAlMenu.habilitar()
     }
 }
 object pantallaPerder {
@@ -63,6 +84,8 @@ object pantallaPerder {
     method mostrar() {
         game.clear()
         game.addVisual(self)
+        game.addVisual(indicadorVolverAlMenu)
+        atajoVolverAlMenu.habilitar()
     }
 }
 
@@ -72,6 +95,8 @@ object pantallaGanar {
 
     method mostrar() {
         game.clear()
-        game.addVisual(self)    
+        game.addVisual(self)
+        game.addVisual(indicadorVolverAlMenu)
+        atajoVolverAlMenu.habilitar()
     }
 }

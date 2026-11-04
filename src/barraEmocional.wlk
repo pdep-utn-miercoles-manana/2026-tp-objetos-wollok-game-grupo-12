@@ -11,6 +11,8 @@ object barraEmocional {
     
     method porcentaje() = porcentaje
 
+    method reiniciar() { porcentaje = 0.5 }
+
     method modificarPorcentaje(cantidad) {
         porcentaje = 0.max(1.min(porcentaje + cantidad))
         self.chequearEstado()

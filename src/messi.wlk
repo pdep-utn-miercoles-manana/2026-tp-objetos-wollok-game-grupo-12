@@ -23,6 +23,12 @@ object messi {
         estadoEmocional = nuevoEstado
     }
 
+    method reiniciar() {
+        position = game.at(8, 0)
+        estadoEmocional = gestionDeNivel.dificultadActual().estable()
+        enCooldown = false
+    }
+
     method moverseALaIzquierda() {
         if (not enCooldown) {
             const nuevaX = 0.max(position.x() - 1)

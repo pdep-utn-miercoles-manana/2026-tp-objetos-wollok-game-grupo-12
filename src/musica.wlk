@@ -1,25 +1,45 @@
+object silencio {
+    method played() = false
+    method stop() {}
+}
+
 object reproductorMusical {
-    const musicaDeFondo = game.sound("musicaFondo.mp3")
+    var musicaDeFondo = silencio
+    var musicaFinal = silencio
 
     method iniciarMusicaFondo() {
-        musicaDeFondo.shouldLoop(true)
-        musicaDeFondo.volume(0.3)
-        game.schedule(500, { musicaDeFondo.play() })
+        const musica = game.sound("musicaFondo.mp3")
+        musica.shouldLoop(true)
+        musica.volume(0.3)
+        musicaDeFondo = musica
+        game.schedule(500, { musica.play() })
     }
 
     method detenerMusicaFondo() {
-        musicaDeFondo.stop()
+        self.detener(musicaDeFondo)
+    }
+
+    method detener(sonido) {
+        if (sonido.played()) { sonido.stop() }
     }
 
     method reproducirVictoria() {
-        self.detenerMusicaFondo()
-
-        game.sound("musicaVictoria.mp3").play()
+        self.reproducirFinal("musicaVictoria.mp3")
     }
 
     method reproducirDerrota() {
-        self.detenerMusicaFondo()
+        self.reproducirFinal("musicaDerrota.mp3")
+    }
 
-        game.sound("musicaDerrota.mp3").play()
+    method reproducirFinal(archivo) {
+        self.detenerMusicaFondo()
+        musicaFinal = game.sound(archivo)
+        musicaFinal.play()
+    }
+
+    method reiniciar() {
+        self.detener(musicaFinal)
+        self.detenerMusicaFondo()
+        self.iniciarMusicaFondo()
     }
 }
