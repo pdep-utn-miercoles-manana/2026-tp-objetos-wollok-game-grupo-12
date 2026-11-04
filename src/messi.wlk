@@ -9,10 +9,13 @@ object messi {
     var position = game.at(8, 0)
     var estadoEmocional = normal.estable()
     var enCooldown = false
+    var imagenActual = "messi.png"
 
     method position() = position
 
-    method image() = "messi.png"
+    method image() = imagenActual
+
+    method cambiarImagen(nuevaImagen) { imagenActual = nuevaImagen }
 
     method estadoEmocional() = estadoEmocional
 
