@@ -26,7 +26,7 @@ object pantallaMenu {
         keyboard.num1().onPressDo({
             gestionDeNivel.cambiarDificultad(normal)
             imagenActual = "pantallaMenu_normal.png"
-            indicadorDificultad.cambiarTexto("Dificultad seleccionada: NORMAL (Usá 2 para cambiar, Enter para iniciar")
+            indicadorDificultad.cambiarTexto("Dificultad seleccionada: NORMAL (Usá 2 para cambiar, Enter para iniciar)")
         })
         
         keyboard.num2().onPressDo({

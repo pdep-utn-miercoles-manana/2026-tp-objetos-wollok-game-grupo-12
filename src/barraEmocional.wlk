@@ -5,7 +5,7 @@ import gestionDeNiveles.*
 import estados.*
 object barraEmocional {
     var porcentaje = 0.5
-    const position = game.at(6, 8) 
+    const position = game.at(5, 7) 
 
     method position() = position
     
@@ -34,6 +34,6 @@ object barraEmocional {
 object indicadorBarra {
     method image() = "indicador.png"
     
-    method xActual() = 4 + (barraEmocional.porcentaje() * 4)
+    method xActual() = 5 + (barraEmocional.porcentaje() * 5)
     method position() = game.at(self.xActual().truncate(0), 8)
 }
