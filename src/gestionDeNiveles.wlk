@@ -5,7 +5,10 @@ import estados.*
 object gestionDeNivel {
     var dificultadActual = normal
     method dificultadActual() = dificultadActual
-    method cambiarDificultad(nuevaDificultad) { dificultadActual = nuevaDificultad }
+    method cambiarDificultad(nuevaDificultad) {
+        dificultadActual = nuevaDificultad
+        nuevaDificultad.afectarImagen()
+    }
     
     method iniciarCaidaDeRecolectables() {
         game.onTick(1500, "generadorObjetos", { self.generarObjeto() })
