@@ -1,0 +1,33 @@
+import src.messi.*
+import src.barraEmocional.*
+import src.recolectables.*
+import src.gestionDeNiveles.*
+import src.estados.*
+
+describe "Messi Game - logica principal" {
+
+  test "Messi atrapa cualquier recolectable sin saber cual es y cada uno modifica la barra a su manera" {
+    messi.atraparRecolectable(gol.apply())
+    assert.equals(0.55, barraEmocional.porcentaje())
+
+    messi.atraparRecolectable(critica.apply())
+    assert.equals(0.45, barraEmocional.porcentaje())
+  }
+
+  test "Cuando la barra sube a Gloria Messi se mueve mas rapido y cuando baja a Crisis se mueve mas lento" {
+    barraEmocional.modificarPorcentaje(0.2)
+    assert.equals(50, messi.estadoEmocional().tiempoCooldown())
+    assert.equals(800, messi.estadoEmocional().velocidadCaida())
+
+    barraEmocional.modificarPorcentaje(-0.4)
+    assert.equals(300, messi.estadoEmocional().tiempoCooldown())
+    assert.equals(300, messi.estadoEmocional().velocidadCaida())
+  }
+
+  test "Con el mismo porcentaje la dificultad dificil genera un estado de Gloria mas exigente que la normal" {
+    gestionDeNivel.cambiarDificultad(dificil)
+    barraEmocional.modificarPorcentaje(0.2)
+    assert.equals(100, messi.estadoEmocional().tiempoCooldown())
+    assert.equals(500, messi.estadoEmocional().velocidadCaida())
+  }
+}
