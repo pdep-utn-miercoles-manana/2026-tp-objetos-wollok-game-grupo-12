@@ -23,27 +23,19 @@ object pantallaMenu {
         game.addVisual(self)
         game.addVisual(indicadorDificultad)
         
-        keyboard.num1().onPressDo{
-            game.removeVisual(indicadorDificultad)
-             
+        keyboard.num1().onPressDo({
             gestionDeNivel.cambiarDificultad(normal)
             imagenActual = "pantallaMenu_normal.png"
             indicadorDificultad.cambiarTexto("Dificultad seleccionada: NORMAL (Usá 2 para cambiar, Enter para iniciar")
-            
-            game.addVisual(indicadorDificultad)
-        }
+        })
         
-        keyboard.num2().onPressDo{
-            game.removeVisual(indicadorDificultad)
-
+        keyboard.num2().onPressDo({
             gestionDeNivel.cambiarDificultad(dificil)
             imagenActual = "pantallaMenu_dificil.png"
             indicadorDificultad.cambiarTexto("Dificultad seleccionada: DIFÍCIL (Usá 1 para cambiar, Enter para iniciar)")
-                
-            game.addVisual(indicadorDificultad)
-        }
+        })
 
-        keyboard.enter().onPressDo{self.iniciarJuego()}
+        keyboard.enter().onPressDo({self.iniciarJuego()})
     }
 
     method iniciarJuego() {
@@ -66,7 +58,7 @@ object pantallaMenu {
 }
 object pantallaPerder {
     method position() = game.at(0, 0)
-    method image() = "gameOver.png"
+    method image() = "pantallaPerder.png"
 
     method mostrar() {
         game.clear()
@@ -76,7 +68,7 @@ object pantallaPerder {
 
 object pantallaGanar {
     method position() = game.at(0, 0)
-    method image() = "ganar.png"
+    method image() = "pantallaGanar.png"
 
     method mostrar() {
         game.clear()

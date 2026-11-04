@@ -22,7 +22,7 @@ object normal {
     method gloria() = new EstadoEmocional(
         tiempoCooldown = 50, 
         velocidadCaida = 800, 
-        itemsPosibles = [ copaMundial, gol, hattrick, critica ]
+        itemsPosibles = [ copaMundial, gol, camisetaDiez, critica ]
     )
 }
 
@@ -30,18 +30,18 @@ object dificil {
     method crisis() = new EstadoEmocional(
         tiempoCooldown = 400,
         velocidadCaida = 150,
-        itemsPosibles = [ sancorSeguros, finalPerdida, finalPerdida, critica ] 
+        itemsPosibles = [ sancorSeguros, sancorSeguros, finalPerdida, critica, gol, camisetaDiez] 
     )
     
     method estable() = new EstadoEmocional(
         tiempoCooldown = 200, 
         velocidadCaida = 300, 
-        itemsPosibles = [ penalErrado, critica, finalPerdida, gol ] 
+        itemsPosibles = [ tarjetaRoja, critica, finalPerdida, gol ] 
     )
     
     method gloria() = new EstadoEmocional(
         tiempoCooldown = 100, 
         velocidadCaida = 500, 
-        itemsPosibles = [ copaAmerica, gol, penalErrado, critica ] 
+        itemsPosibles = [ copaAmerica, gol, tarjetaRoja, critica, finalPerdida ] 
     )
 }

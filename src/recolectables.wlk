@@ -3,12 +3,12 @@ import barraEmocional.*
 
 class Recolectable {
     var position = game.origin()
+    const property image
 
     method position() = position
     method position(nuevaPosicion) { position = nuevaPosicion }
     
-    method image()
-
+    
     method iniciarCaida(velocidad) {
         game.onTick(velocidad, "caer_" + self.identity().toString(), { self.caer() })
     }
@@ -38,8 +38,6 @@ class Recolectable {
 class RecolectableMalo inherits Recolectable {
     const impacto 
     
-    override method image() = "critica.png"
-
     override method aplicarEfecto() {
         barraEmocional.modificarPorcentaje(impacto)
     }
@@ -47,18 +45,17 @@ class RecolectableMalo inherits Recolectable {
 
 class RecolectableBueno inherits Recolectable {
     const impacto 
-    override method image() = "gol.png" 
     
     override method aplicarEfecto() {
         barraEmocional.modificarPorcentaje(impacto)
     }
 }
 
-const sancorSeguros = { => new RecolectableMalo(impacto = -4.5) }
-const penalErrado = { => new RecolectableMalo(impacto = -0.5) }
-const finalPerdida = { => new RecolectableMalo(impacto = -0.4) }
-const gol = { => new RecolectableBueno(impacto = 0.15) }
-const critica = { => new RecolectableMalo(impacto = -0.15) }
-const copaMundial = { => new RecolectableBueno(impacto = 0.4) }
-const copaAmerica = { => new RecolectableBueno(impacto = 0.25) }
-const hattrick = { => new RecolectableBueno(impacto = 0.25) }
+const sancorSeguros = { => new RecolectableMalo(impacto = -1.0, image = "sancorSeguros.png") }
+const tarjetaRoja = { => new RecolectableMalo(impacto = -0.05, image = "tarjetaRoja .png") }
+const finalPerdida = { => new RecolectableMalo(impacto = -0.25, image = "finalPerdida.png") }
+const gol = { => new RecolectableBueno(impacto = 0.05, image = "gol.png") }
+const critica = { => new RecolectableMalo(impacto = -0.1, image = "critica.png") }
+const copaMundial = { => new RecolectableBueno(impacto = 0.25, image = "copaMundial.png") }
+const copaAmerica = { => new RecolectableBueno(impacto = 0.1, image = "copaAmerica.png") }
+const camisetaDiez = { => new RecolectableBueno(impacto = 0.07, image = "camisetaDiez.png") }
