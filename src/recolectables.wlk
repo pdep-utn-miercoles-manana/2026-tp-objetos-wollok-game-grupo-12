@@ -21,6 +21,7 @@ class Recolectable {
     }
 
     method esAtrapadoPor(personaje) {
+        self.reproducirSonido()
         self.aplicarEfecto()
         self.desaparecerSeguro()
     }
@@ -32,12 +33,20 @@ class Recolectable {
         }
     }
 
+    method reproducirSonido() {
+        game.sound(self.sonido()).play()
+    }
+
+    method sonido()
+
     method aplicarEfecto()
 }
 
 class RecolectableMalo inherits Recolectable {
     const impacto 
     
+    override method sonido() = "sonidoMalo.mp3"
+
     override method aplicarEfecto() {
         barraEmocional.modificarPorcentaje(impacto)
     }
@@ -45,6 +54,8 @@ class RecolectableMalo inherits Recolectable {
 
 class RecolectableBueno inherits Recolectable {
     const impacto 
+
+    override method sonido() = "sonidoBueno.mp3"
     
     override method aplicarEfecto() {
         barraEmocional.modificarPorcentaje(impacto)
@@ -52,7 +63,7 @@ class RecolectableBueno inherits Recolectable {
 }
 
 const sancorSeguros = { => new RecolectableMalo(impacto = -1.0, image = "sancorSeguros.png") }
-const tarjetaRoja = { => new RecolectableMalo(impacto = -0.05, image = "tarjetaRoja .png") }
+const tarjetaRoja = { => new RecolectableMalo(impacto = -0.05, image = "tarjetaRoja.png") }
 const finalPerdida = { => new RecolectableMalo(impacto = -0.25, image = "finalPerdida.png") }
 const gol = { => new RecolectableBueno(impacto = 0.05, image = "gol.png") }
 const critica = { => new RecolectableMalo(impacto = -0.1, image = "critica.png") }
